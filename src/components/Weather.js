@@ -13,24 +13,27 @@ class Weather extends Component {
 		this.getData = this.getData.bind(this);
 	}
 	async getData() {
-		const location = await axios.get('/api/ip');
-		// const weather = await axios.get('/api/weather/');
-		console.log(location);
-		// console.log(weather);
-		// console.log(weather);
-		// this.setState({
-		//     location: location.data,
-		//     weather
-		// });
+		const weather = await axios.get('/api/weather');
+		console.log(weather);
+		this.setState((prevState, props) => {
+		  return {
+		  	location: weather.data.location,
+			weather: weather.data,
+			onLoading: !prevState.onLoading
+		  };
+		});
 	}
 	componentDidMount = () => {
-		console.log('new');
 		this.getData();
 	}
 	render() {
 		return (
 			<div className="u-container">
-			<h1>hava</h1>
+				<h1>hava</h1>
+				<div className="u-loading">
+					{this.state.onLoading? 'Loading...' : ''}
+				</div>
+				<h2>{this.state.weather.location? this.state.weather.location.region : ''}</h2>
 			</div>
 			);
 	}

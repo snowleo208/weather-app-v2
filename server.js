@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 
 const port = process.env.PORT || 3001;
 
-app.get('/api/ip', async function (req, res) {
+app.get('/api/weather', async function (req, res) {
 	let location = await axios.get('https://ipinfo.io?token=' + process.env.IPINFO_API_KEY)
 	.catch(err => console.log(err));
 	let weather = await axios.get("https://api.darksky.net/forecast/" + process.env.DARKSKY_API_KEY + "/" + location.data.loc)
