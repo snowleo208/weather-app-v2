@@ -45,7 +45,7 @@ class Weather extends Component {
 		const { weather, location } = this.state;
 		const week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 		return (
-			<div className="c-container">
+			<div>
 			<header>
 			<img src="logo_xs.png" alt="hava" />
 
@@ -53,13 +53,14 @@ class Weather extends Component {
 			<svg className="u-icon__md" aria-labelledby="title" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 			<title>Temperature</title>
 			{this.state.onTempTrigger? 
-			<use href="sprite.svg#celsius"></use>
-			:
-			<use href="sprite.svg#fahrenheit"></use>
+				<use href="sprite.svg#celsius"></use>
+				:
+				<use href="sprite.svg#fahrenheit"></use>
 			}
 			</svg>
 			</div>
 			</header>
+			<div className="c-container">
 			<div className={this.state.onLoading? "u-loading" : "u-none"}>
 			{this.state.onLoading?
 				<svg className="u-icon__md" aria-labelledby="title" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
@@ -69,7 +70,7 @@ class Weather extends Component {
 				: ''}
 				</div>
 				{!this.state.onLoading && weather.location? (
-					<div className="u-fade">
+					<div className="c-weather--container u-fade">
 					<section className="c-weather--grid">
 					<div className="u-btn c-weather--reload" onClick={this.reloadData}>
 					<svg className="u-icon__md" aria-labelledby="title" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
@@ -77,7 +78,6 @@ class Weather extends Component {
 					<use href={"sprite.svg#spin"}></use>
 					</svg>
 					</div>
-
 					<svg className="u-icon__xl" aria-labelledby="title" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 					<title>{weather.currently + " icon"}</title>
 					<use href={"sprite.svg#" + weather.currently.icon}></use>
@@ -86,10 +86,11 @@ class Weather extends Component {
 						<h2 className="c-weather--temp u-text-center">{Math.round(((weather.currently.temperature - 32) * 5/9))}<span className="u-small"> °C</span></h2> : 
 						<h2 className="c-weather--temp u-text-center">{Math.round(weather.currently.temperature)}<span className="u-small"> °F</span></h2>
 					}
-
 					<p className="c-weather--area">{location.region.toUpperCase() + ', ' + location.country}</p>
 					<p className="c-weather--summary">{weather.currently.summary}</p>
 					</section>
+
+					<div className="u-flex-half">
 					<section className="c-weather--info">
 					<div className="c-weather--details">
 					<p className="t-info--value u-m-0">{weather.currently.windSpeed}</p>
@@ -116,6 +117,7 @@ class Weather extends Component {
 					<p className="t-info--title u-m-0">Humidity</p>
 					</div>
 					</section>
+
 					<section className="c-weather--forecast">
 					{weather.hourly.data.map((item, index) => (
 						index <= 4 ? 
@@ -130,9 +132,10 @@ class Weather extends Component {
 							) : ''
 						))}
 					</section>
+					</div>
 					<section className="c-weather--daily">
 					{weather.daily.data.map((item, index) => (
-						index !== 0 && index <= 5 ? 
+						index !== 0 && index <= 6 ? 
 						(
 							<div className="c-daily--grid" key={"forecast-" + index}>
 							<svg className="u-icon__md" aria-labelledby="title" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
@@ -141,13 +144,11 @@ class Weather extends Component {
 							</svg>
 							<div className="c-daily--forecast">
 							<p className="c-daily--time">{week[new Date(item.time * 1000).getDay()]}</p>
-							<p className="c-daily--summary">{item.summary}</p>
-							</div>
-							<div className="c-daily--temp">
 							{this.state.onTempTrigger? 
-								<p>{Math.round(((item.temperatureLow - 32) * 5/9))} - {Math.round(((item.temperatureHigh-32) * 5/9))} °C</p> : 
-								<p>{Math.round(item.temperatureLow)} - {Math.round(item.temperatureHigh)} °F</p>
+								<p className="c-daily--time">{Math.round(((item.temperatureLow - 32) * 5/9))}/{Math.round(((item.temperatureHigh-32) * 5/9))} °C</p> : 
+								<p className="c-daily--time">{Math.round(item.temperatureLow)}/{Math.round(item.temperatureHigh)} °F</p>
 							}
+							<p className="c-daily--summary">{item.summary}</p>
 							</div>
 							</div>
 							) : ''
@@ -155,8 +156,9 @@ class Weather extends Component {
 					</section>
 					</div>
 					) : ''}
-</div>
-);
+				</div>
+				</div>
+				);
 }
 }
 

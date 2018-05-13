@@ -25,6 +25,14 @@ body
 	margin: 0
 	padding: 0
 
+#root > div
+	@media #{$laptop}
+		background: url('/img/casey-horner-555820-unsplash.jpg')
+		background-size: cover
+		background-repeat: no-repeat
+		width: 100%
+		height: 100%
+
 div
 	width: 100%
 	box-sizing: border-box
@@ -111,6 +119,9 @@ header
 	width: 100%
 	padding: 1em 0
 	@extend .u-flex-center
+	@media #{$laptop}
+		width: auto
+		// background: transparent
 
 // ==============
 // Weather Grid
@@ -120,12 +131,37 @@ header
 	position: relative
 	@extend .u-flex-center
 	animation: fade 1s linear
+	@media #{$laptop}
+		background: rgba(255,255,255,0.6)
+		width: 60%
+		flex-flow: row wrap
+		margin: 0 auto
+		margin-top: 1em
+		margin-bottom: 1em
+
+.u-flex-half
+	@media #{$laptop}
+		margin-top: 1em
 
 .c-weather
+
+	&--desktop
+		display: none
+		@media #{$laptop}
+			display: block
+			position: absolute
+			color: white
+			text-align: left
 	&--grid
 		position: relative
 		@extend .u-flex-center
 		padding: 1.5em 1em
+		@media #{$laptop}
+			// display: none
+			flex: 1 1 100%
+			.u-icon__xl
+				width: 7em
+				height: 7em
 
 	&--switch
 		position: absolute
@@ -144,6 +180,10 @@ header
 		font-size: 2em
 		font-weight: 500
 		margin-bottom: 0
+		@extend .u-text-center
+		@media #{$laptop}
+			font-size: 4em
+			margin-top: 0
 
 	&--area
 		@extend .u-text-center
@@ -166,6 +206,9 @@ header
 	border-radius: 5px
 	padding: 0.5em
 	margin: 0 0.8em
+	@media #{$laptop}
+		margin: 0 3em
+
 	.c-weather--details
 		@extend .u-text-center
 		@extend .u-flex-center
@@ -209,33 +252,36 @@ header
 	@media #{$tablet}
 		flex-flow: column wrap
 
+	@media #{$laptop}
+		flex-flow: row wrap
+		flex: 1 1 100%
+		margin: 0 3em 3em
+
 .c-daily
 	&--grid
 		@extend .u-flex-center
 		display: flex
 		flex-flow: row wrap
 		border: 0
-		flex: 1 1 20%
+		flex: 1 1 33.3%
 		@media #{$tablet}
 			flex-flow: row wrap
-			padding: 1em 0
+			padding: 0.5em 0
 			border-bottom: solid 1px #eee
 			&:last-of-type
 				border-bottom: 0
 			svg
-				width: 4em
-				height: 4em
-				flex: 1 1 25%
+				width: 3.5em
+				height: 3.5em
+				flex: 0 0 30%
+		@media #{$laptop}
+			flex: 1 1 50%
+			border-bottom: 0
 
 	&--forecast
+		padding: 0.5em
 		@media #{$tablet}
-			flex:  0 0 60%
-
-	&--temp
-		display: none
-		@media #{$tablet}
-			display: flex
-			flex:  0 0 15%
+			flex:  0 0 70%
 
 	&--time
 		text-align: center
