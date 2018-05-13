@@ -23,12 +23,20 @@ class Weather extends Component {
 			};
 		});
 	}
+	reloadData = () => {
+		this.setState((prevState, props) => {
+			return {
+				onLoading: !prevState.onLoading
+			};
+		});
+		this.getData();
+	}
 	componentDidMount = () => {
 		this.getData();
 	}
 	render() {
 		const { weather, location } = this.state;
-		const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+		const week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 		return (
 			<div className="c-container">
 			<header>
@@ -45,6 +53,12 @@ class Weather extends Component {
 			{!this.state.onLoading && weather.location? (
 				<div className="u-fade">
 				<section className="c-weather--grid">
+				<div className="u-btn c-weather--reload" onClick={this.reloadData}>
+				<svg className="u-icon__md" aria-labelledby="title" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+				<title>Reload</title>
+				<use href={"sprite.svg#spin"}></use>
+				</svg>
+				</div>
 				<svg className="u-icon__xl" aria-labelledby="title" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 				<title>{weather.currently + " icon"}</title>
 				<use href={"sprite.svg#" + weather.currently.icon}></use>
@@ -102,10 +116,7 @@ class Weather extends Component {
 							<title>{item.icon}</title>
 							<use href={"sprite.svg#" + item.icon}></use>
 							</svg>
-							<p className="c-forecast--time">
-							{new Date(item.time * 1000).getDate() + " "}
-							{month[new Date(item.time * 1000).getMonth()]}
-							</p>
+							<p className="c-forecast--time">{week[new Date(item.time * 1000).getDay()]}</p>
 							</div>
 							) : ''
 					))}
