@@ -6,13 +6,19 @@ $primary-dark: rgba(0,100,160,1);
 
 $primary-opacity: rgba(0,100,160,0.05);
 
+//text color
 $text: rgb(66, 66, 66);
+
+//mobile query based on bootstrap
+$phone: "only screen and (min-width : 576px)";
+$tablet: "only screen and (min-width : 768px)";
+$laptop: "only screen and (min-width : 992px)";
+$desktop: "only screen and (min-width : 1200px)";
 
 html,
 body
 	width: 100%
 	height: 100%
-	box-sizing: border-box
 	font-family: 'Source Sans Pro', sans-serif
 	color: $text
 	background: #F4F9FF
@@ -21,6 +27,7 @@ body
 
 div
 	width: 100%
+	box-sizing: border-box
 
 h
 	font-family: 'Open Sans', sans-serif
@@ -62,6 +69,12 @@ h
 .u-fade
 	animation: fade 0.5s linear
 
+@keyframes fade
+  from
+    opacity: 0
+  to
+    opacity: 1
+
 .u-loading
 	display: block
 	margin: 1em
@@ -95,7 +108,7 @@ h
 
 header
 	background: white
-	width: 100vw
+	width: 100%
 	padding: 1em 0
 	@extend .u-flex-center
 
@@ -113,6 +126,19 @@ header
 		position: relative
 		@extend .u-flex-center
 		padding: 1.5em 1em
+
+	&--switch
+		position: absolute
+		display: block
+		width: auto
+		top: 0.8em
+		right: 0.5em
+		transition: 400ms
+		cursor: pointer
+		&:hover
+			background: $text
+			svg
+				fill: white
 
 	&--temp
 		font-size: 2em
@@ -140,7 +166,7 @@ header
 	border-radius: 5px
 	padding: 0.5em
 	margin: 0 0.8em
-	div
+	.c-weather--details
 		@extend .u-text-center
 		@extend .u-flex-center
 		flex: 0 0 33%
@@ -158,22 +184,66 @@ header
 	&--title
 		font-weight: 300
 
+// hourly forecast grid
 .c-weather--forecast
-	margin-bottom: 1em
 	@extend .c-weather--info
+	margin-bottom: 1em
 	margin-top: 1em
 	padding: 1em 0.5em
 	background: white
 	svg
 		fill: $primary-light
-	div
-		flex: 0 0 20%
-		border: 0
 	p
 		margin: 0
 
-@keyframes fade
-  from
-    opacity: 0
-  to
-    opacity: 1
+.c-forecast--grid
+	@extend .u-flex-center
+	flex: 0 0 20%
+	border: 0
+
+//daily forecast grid
+.c-weather--daily
+	@extend .c-weather--forecast
+	padding: 0.5em
+
+	@media #{$tablet}
+		flex-flow: column wrap
+
+.c-daily
+	&--grid
+		@extend .u-flex-center
+		display: flex
+		flex-flow: row wrap
+		border: 0
+		flex: 1 1 20%
+		@media #{$tablet}
+			flex-flow: row wrap
+			padding: 1em 0
+			border-bottom: solid 1px #eee
+			&:last-of-type
+				border-bottom: 0
+			svg
+				width: 4em
+				height: 4em
+				flex: 1 1 25%
+
+	&--forecast
+		@media #{$tablet}
+			flex:  0 0 60%
+
+	&--temp
+		display: none
+		@media #{$tablet}
+			display: flex
+			flex:  0 0 15%
+
+	&--time
+		text-align: center
+		@media #{$tablet}
+			font-weight: bold
+			text-align: left
+
+	&--summary
+		display: none
+		@media #{$tablet}
+			display: block
