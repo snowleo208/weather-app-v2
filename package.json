@@ -47,10 +47,11 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "client": "cd client && npm start",
+    "client": "cd client && npm run start-dev",
     "server": "nodemon server.js",
     "dev": "npm-run-all -p server client",
     "start-js": "node scripts/start.js",
+    "start-dev": "npm-run-all -p watch-css start-js",
     "start": "node server.js",
     "build-js": "node scripts/build.js",
     "build-css": "node-sass-chokidar --include-path ./client/stylesheets --include-path ./node_modules client/ -o client/",
