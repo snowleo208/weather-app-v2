@@ -14,7 +14,7 @@ class Weather extends Component {
 	}
 	async getData() {
 		const weather = await axios.get('/api/weather');
-		console.log(weather);
+		// console.log(weather);
 		this.setState((prevState, props) => {
 			return {
 				location: weather.data.location,
@@ -41,12 +41,12 @@ class Weather extends Component {
 	setBackground = () => {
 		if(window.innerWidth > 1000) {
 			let hour = new Date().getHours();
-			if(hour > 3 && hour < 12) {
-				document.getElementById('app').style.background = "url('/img/simon-matzinger-345390-unsplash.jpg') cover";
-			} else if (hour > 18) {
-				document.getElementById('app').style.background = "url('/img/michael-liao-388166-unsplash.jpg') cover";
+			if(hour > 5 && hour < 12) {
+				document.getElementById('app').style.backgroundImage = "url('/img/simon-matzinger-345390-unsplash.jpg')";
+			} else if (hour > 18 && hour < 5) {
+				document.getElementById('app').style.backgroundImage = "url('/img/michael-liao-388166-unsplash.jpg')";
 			} else {
-				document.getElementById('app').style.background = "url('/img/ales-krivec-24158-unsplash.jpg') cover";
+				document.getElementById('app').style.backgroundImage = "url('/img/ales-krivec-24158-unsplash.jpg')";
 			}
 
 		}
