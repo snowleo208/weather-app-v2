@@ -1,5 +1,5 @@
-$primary: rgba(0,145,231,1);
-$primary-light: rgba(10,164,255,0.7);
+$primary: #478CE1;
+$primary-light: #7ABEFC;
 $primary-2: rgba(4,161,255,1);
 $primary-3: rgba(0,120,191,1);
 $primary-dark: rgba(0,100,160,1);
@@ -15,7 +15,7 @@ body
 	box-sizing: border-box
 	font-family: 'Source Sans Pro', sans-serif
 	color: $text
-	background: $primary-opacity
+	background: #F4F9FF
 	margin: 0
 	padding: 0
 
@@ -26,7 +26,7 @@ h
 	font-family: 'Open Sans', sans-serif
 
 .u
-	.u-text-center
+	&-text-center
 		text-align: center
 
 	&-m-0
@@ -40,6 +40,10 @@ h
 		flex-flow: column wrap
 		align-items: center
 		justify-content: center
+	&-small
+		font-size: 0.8em
+	&-none
+		display: none
 
 .u-icon
 	&__xs
@@ -51,12 +55,16 @@ h
 		height: 2em
 		fill: $text
 	&__xl
-		width: 3em
-		height: 3em
+		width: 6em
+		height: 6em
 		fill: $primary
+
+.u-fade
+	animation: fade 1s linear
 
 .u-loading
 	display: block
+	margin: 1em
 	svg
 		display: block
 		fill: $primary
@@ -82,11 +90,21 @@ header
 
 .c-container
 	@extend .u-flex-center
+	animation: fade 1s linear
 
 .c-weather
 	&--grid
 		@extend .u-flex-center
-		padding: 1em
+		padding: 1.5em 1em
+
+	&--temp
+		font-size: 2em
+		font-weight: 500
+		margin-bottom: 0
+
+	&--area
+		@extend .u-text-center
+		margin-bottom: 0.5em
 
 	&--summary
 		@extend .u-text-center
@@ -98,27 +116,42 @@ header
 	flex-flow: row wrap
 	background: white
 	border-radius: 5px
+	padding: 0.5em
+	margin: 0 0.8em
 	div
 		@extend .u-text-center
 		@extend .u-flex-center
-		flex: 0 0 33.3%
+		flex: 0 0 33%
+		border-right: 1px solid #eee
+		&:last-of-type
+			border-right: 0
 	p
 		padding: 0.5em 0
 
 .t-info
-	&--title
-		font-weight: 300
 	&--value
 		font-size: 1.2em
 		font-weight: bold
 		color: $primary-light
+	&--title
+		font-weight: 300
 
 .c-weather--forecast
+	margin-bottom: 1em
 	@extend .c-weather--info
 	margin-top: 1em
-	padding: 1em 0
+	padding: 1em 0.5em
 	background: white
+	svg
+		fill: $primary-light
 	div
-		flex: 0 0 25%
+		flex: 0 0 20%
+		border: 0
 	p
 		margin: 0
+
+@keyframes fade
+  from
+    opacity: 0
+  to
+    opacity: 1

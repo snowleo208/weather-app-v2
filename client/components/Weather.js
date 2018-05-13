@@ -28,12 +28,13 @@ class Weather extends Component {
 	}
 	render() {
 		const { weather, location } = this.state;
+		const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 		return (
 			<div className="c-container">
 			<header>
 				<img src="logo_xs.png" alt="hava" />
 			</header>
-			<div className="u-loading">
+			<div className={this.state.onLoading? "u-loading" : "u-none"}>
 			{this.state.onLoading?
 				<svg className="u-icon__md" aria-labelledby="title" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 				<title>Icon</title>
@@ -42,22 +43,22 @@ class Weather extends Component {
 			 : ''}
 			</div>
 			{!this.state.onLoading && weather.location? (
-				<div>
+				<div className="u-fade">
 				<section className="c-weather--grid">
 				<svg className="u-icon__xl" aria-labelledby="title" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 				<title>{weather.currently + " icon"}</title>
 				<use href={"sprite.svg#" + weather.currently.icon}></use>
 				</svg>
-				<p className="u-text-center">{weather.currently.temperature} °F</p>
-				<p className="u-text-center">{location.region.toUpperCase() + ', ' + location.country}</p>
-				<p className="c-weather--summary">{weather.hourly.summary}</p>
+				<h2 className="c-weather--temp u-text-center">{weather.currently.temperature}<span className="u-small"> °F</span></h2>
+				<p className="c-weather--area">{location.region.toUpperCase() + ', ' + location.country}</p>
+				<p className="c-weather--summary">{weather.currently.summary}</p>
 				</section>
 				<section className="c-weather--info">
 					<div className="c-weather--wind">
 						<p className="t-info--value u-m-0">{weather.currently.windSpeed}</p>
 						<svg className="u-icon__md" aria-labelledby="title" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 						<title>Wind</title>
-						<use href={"sprite.svg#" + weather.currently.icon}></use>
+						<use href={"sprite.svg#strong-wind"}></use>
 						</svg>
 						<p className="t-info--title u-m-0">Wind</p>
 					</div>
@@ -80,7 +81,7 @@ class Weather extends Component {
 				</section>
 				<section className="c-weather--forecast">
 					{weather.hourly.data.map((item, index) => (
-						index <= 3 ? 
+						index <= 4 ? 
 							(
 							<div className="c-forecast--grid" key={"forecast-" + index}>
 							<svg className="u-icon__md" aria-labelledby="title" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
@@ -88,6 +89,23 @@ class Weather extends Component {
 							<use href={"sprite.svg#" + item.icon}></use>
 							</svg>
 							<p className="c-forecast--time">{new Date(item.time * 1000).getHours() + ":00"}</p>
+							</div>
+							) : ''
+					))}
+				</section>
+				<section className="c-weather--forecast">
+					{weather.daily.data.map((item, index) => (
+						index !== 0 && index <= 5 ? 
+							(
+							<div className="c-forecast--grid" key={"forecast-" + index}>
+							<svg className="u-icon__md" aria-labelledby="title" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+							<title>{item.icon}</title>
+							<use href={"sprite.svg#" + item.icon}></use>
+							</svg>
+							<p className="c-forecast--time">
+							{new Date(item.time * 1000).getDate() + " "}
+							{month[new Date(item.time * 1000).getMonth()]}
+							</p>
 							</div>
 							) : ''
 					))}
