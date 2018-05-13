@@ -1,8 +1,124 @@
-html
+$primary: rgba(0,145,231,1);
+$primary-light: rgba(10,164,255,0.7);
+$primary-2: rgba(4,161,255,1);
+$primary-3: rgba(0,120,191,1);
+$primary-dark: rgba(0,100,160,1);
+
+$primary-opacity: rgba(0,100,160,0.05);
+
+$text: rgb(66, 66, 66);
+
+html,
+body
 	width: 100%
 	height: 100%
 	box-sizing: border-box
 	font-family: 'Source Sans Pro', sans-serif
+	color: $text
+	background: $primary-opacity
+	margin: 0
+	padding: 0
+
+div
+	width: 100%
 
 h
 	font-family: 'Open Sans', sans-serif
+
+.u
+	.u-text-center
+		text-align: center
+
+	&-m-0
+		margin: 0
+
+	&-p-0
+		margin: 0
+
+	&-flex-center
+		display: flex
+		flex-flow: column wrap
+		align-items: center
+		justify-content: center
+
+.u-icon
+	&__xs
+		width: 1em
+		height: 1em
+		fill: $text
+	&__md
+		width: 2em
+		height: 2em
+		fill: $text
+	&__xl
+		width: 3em
+		height: 3em
+		fill: $primary
+
+.u-loading
+	display: block
+	svg
+		display: block
+		fill: $primary
+		animation: spin 2s linear infinite
+		transform-origin: center
+		margin: 0 auto
+
+@keyframes spin
+  from
+    transform: rotate(0deg)
+  to
+    transform: rotate(360deg)
+
+header
+	background: white
+	width: 100vw
+	padding: 1em 0
+	@extend .u-flex-center
+
+// ==============
+// Weather Grid
+// ==============
+
+.c-container
+	@extend .u-flex-center
+
+.c-weather
+	&--grid
+		@extend .u-flex-center
+		padding: 1em
+
+	&--summary
+		@extend .u-text-center
+		margin: 0
+
+//main info grid
+.c-weather--info
+	@extend .u-flex-center
+	flex-flow: row wrap
+	background: white
+	border-radius: 5px
+	div
+		@extend .u-text-center
+		@extend .u-flex-center
+		flex: 0 0 33.3%
+	p
+		padding: 0.5em 0
+
+.t-info
+	&--title
+		font-weight: 300
+	&--value
+		font-size: 1.2em
+		font-weight: bold
+		color: $primary-light
+
+.c-weather--forecast
+	@extend .c-weather--info
+	margin-top: 1em
+	padding: 1em 0
+	background: white
+	div
+		flex: 0 0 25%
+	p
+		margin: 0
