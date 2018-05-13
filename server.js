@@ -25,3 +25,8 @@ app.get('/api/weather', async function (req, res) {
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
+
+// Express only serves static assets in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('build'));
+}

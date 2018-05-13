@@ -38,14 +38,28 @@ class Weather extends Component {
 		});
 		this.getData();
 	}
+	setBackground = () => {
+		if(window.innerWidth > 1000) {
+			let hour = new Date().getHours();
+			if(hour > 3 && hour < 12) {
+				document.getElementById('app').style.background = "url('/img/simon-matzinger-345390-unsplash.jpg') cover";
+			} else if (hour > 18) {
+				document.getElementById('app').style.background = "url('/img/michael-liao-388166-unsplash.jpg') cover";
+			} else {
+				document.getElementById('app').style.background = "url('/img/ales-krivec-24158-unsplash.jpg') cover";
+			}
+
+		}
+	}
 	componentDidMount = () => {
+		this.setBackground();
 		this.getData();
 	}
 	render() {
 		const { weather, location } = this.state;
 		const week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 		return (
-			<div>
+			<div id="app">
 			<header>
 			<img src="logo_xs.png" alt="hava" />
 
