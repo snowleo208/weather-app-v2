@@ -1,6 +1,6 @@
-## Weather App - hava
+## Local Weather App - hava
 
-This app can view current local weather at a glance and powered by [React.js](https://reactjs.org/) and [DarkSky API](https://darksky.net/dev/docs). Open it and view your local weather at a glance! You can also change temperature from °F to °C degrees using the switcher on top right.
+This app can view current local weather at a glance and powered by [React.js](https://reactjs.org/) and [DarkSky API](https://darksky.net/dev/docs). Open it and view your local weather at a glance! You can also change temperature from °F to °C degrees using the switch on top right.
 
 ## User Story
 - I can see the weather in my current location.
