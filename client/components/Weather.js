@@ -65,15 +65,11 @@ class Weather extends Component {
 			<header>
 			<img src="logo_xs.png" alt="hava" />
 
-			<div className="c-weather--switch" onClick={this.triggerTemp}>
-			<svg className="u-icon__md" aria-labelledby="title" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-			<title>Temperature</title>
-			{this.state.onTempTrigger? 
-				<use href="sprite.svg#celsius"></use>
-				:
-				<use href="sprite.svg#fahrenheit"></use>
-			}
-			</svg>
+			<div className="c-weather--reload" onClick={this.reloadData}>
+				<svg className="u-icon__md" aria-labelledby="title" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+				<title>Reload</title>
+				<use href={"sprite.svg#spin"}></use>
+				</svg>
 			</div>
 			</header>
 			<div className="c-container">
@@ -88,12 +84,18 @@ class Weather extends Component {
 				{!this.state.onLoading && weather.location? (
 					<div className="c-weather--container u-fade">
 					<section className="c-weather--grid">
-					<div className="u-btn c-weather--reload" onClick={this.reloadData}>
-					<svg className="u-icon__md" aria-labelledby="title" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-					<title>Reload</title>
-					<use href={"sprite.svg#spin"}></use>
-					</svg>
+					
+					<div className="u-btn c-weather--switch" onClick={this.triggerTemp}>
+						<svg className="u-icon__md" aria-labelledby="title" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+						<title>Temperature</title>
+						{this.state.onTempTrigger? 
+							<use href="sprite.svg#celsius"></use>
+							:
+							<use href="sprite.svg#fahrenheit"></use>
+						}
+						</svg>
 					</div>
+					
 					<svg className="u-icon__xl" aria-labelledby="title" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 					<title>{weather.currently + " icon"}</title>
 					<use href={"sprite.svg#" + weather.currently.icon}></use>
@@ -125,7 +127,7 @@ class Weather extends Component {
 					<p className="t-info--title u-m-0">Visibility</p>
 					</div>
 					<div className="c-weather--details">
-					<p className="t-info--value u-m-0">{weather.currently.humidity * 100 + "%"}</p>
+					<p className="t-info--value u-m-0">{Math.round(weather.currently.humidity * 100) + "%"}</p>
 					<svg className="u-icon__md" aria-labelledby="title" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 					<title>Humidity</title>
 					<use href={"sprite.svg#humidity"}></use>

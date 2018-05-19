@@ -173,18 +173,21 @@ header
 				width: 7em
 				height: 7em
 
-	&--switch
+	&--reload
 		position: absolute
 		display: block
 		width: auto
-		top: 0.8em
+		top: 0.5em
 		right: 0.5em
 		transition: 400ms
 		cursor: pointer
+		margin: 0.5em
+		svg
+			width: 2em
+			height: 2em
 		&:hover
-			background: $text
 			svg
-				fill: white
+				fill: $text
 		@media #{$laptop}
 			top: 0.5em
 
@@ -206,7 +209,7 @@ header
 		@extend .u-text-center
 		margin: 0
 
-	&--reload
+	&--switch
 		position: absolute
 		top: 1em
 		right: 1em
