@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+require('babel-polyfill');
 
 class Weather extends Component {
 	constructor(props) {
@@ -10,6 +11,7 @@ class Weather extends Component {
 			onTempTrigger: false,
 			onLoading: true
 		}
+		this.appRoot = React.createRef();
 		this.getData = this.getData.bind(this);
 	}
 	async getData() {
@@ -42,11 +44,11 @@ class Weather extends Component {
 		if(window.innerWidth > 1000) {
 			let hour = new Date().getHours();
 			if(hour > 5 && hour < 12) {
-				document.getElementById('app').style.backgroundImage = "url('/img/simon-matzinger-345390-unsplash.jpg')";
+				this.appRoot.current.style.backgroundImage = "url('/img/simon-matzinger-345390-unsplash.jpg')";
 			} else if (hour > 18 && hour < 5) {
-				document.getElementById('app').style.backgroundImage = "url('/img/michael-liao-388166-unsplash.jpg')";
+				this.appRoot.current.style.backgroundImage = "url('/img/michael-liao-388166-unsplash.jpg')";
 			} else {
-				document.getElementById('app').style.backgroundImage = "url('/img/ales-krivec-24158-unsplash.jpg')";
+				this.appRoot.current.style.backgroundImage = "url('/img/ales-krivec-24158-unsplash.jpg')";
 			}
 
 		}
@@ -59,7 +61,7 @@ class Weather extends Component {
 		const { weather, location } = this.state;
 		const week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 		return (
-			<div id="app">
+			<div id="app" ref={this.appRoot}>
 			<header>
 			<img src="logo_xs.png" alt="hava" />
 
