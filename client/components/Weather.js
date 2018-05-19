@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import TriggerTempButton from './TriggerTempButton';
+import ReloadButton from './ReloadButton';
 require('babel-polyfill');
 
 class Weather extends Component {
@@ -13,6 +15,8 @@ class Weather extends Component {
 		}
 		this.appRoot = React.createRef();
 		this.getData = this.getData.bind(this);
+		this.reloadData = this.reloadData.bind(this);
+		this.triggerTemp = this.triggerTemp.bind(this);
 	}
 	async getData() {
 		const weather = await axios.get('/api/weather');
@@ -25,14 +29,14 @@ class Weather extends Component {
 			};
 		});
 	}
-	triggerTemp = () => {
+	triggerTemp () {
 		this.setState((prevState, props) => {
 			return {
 				onTempTrigger: !prevState.onTempTrigger
 			};
 		});
 	}
-	reloadData = () => {
+	reloadData () {
 		this.setState((prevState, props) => {
 			return {
 				onLoading: !prevState.onLoading
@@ -53,7 +57,7 @@ class Weather extends Component {
 
 		}
 	}
-	componentDidMount = () => {
+	componentDidMount() {
 		this.setBackground();
 		this.getData();
 	}
@@ -65,12 +69,10 @@ class Weather extends Component {
 			<header>
 			<img src="logo_xs.png" alt="hava" />
 
-			<div className="c-weather--reload" onClick={this.reloadData}>
-				<svg className="u-icon__md" aria-labelledby="title" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-				<title>Reload</title>
-				<use href={"sprite.svg#spin"}></use>
-				</svg>
-			</div>
+			<ReloadButton
+				reloadData={this.reloadData}
+				onClick={this.reloadData}
+			 />
 			</header>
 			<div className="c-container">
 			<div className={this.state.onLoading? "u-loading" : "u-none"}>
@@ -85,16 +87,10 @@ class Weather extends Component {
 					<div className="c-weather--container u-fade">
 					<section className="c-weather--grid">
 					
-					<div className="u-btn c-weather--switch" onClick={this.triggerTemp}>
-						<svg className="u-icon__md" aria-labelledby="title" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-						<title>Temperature</title>
-						{this.state.onTempTrigger? 
-							<use href="sprite.svg#celsius"></use>
-							:
-							<use href="sprite.svg#fahrenheit"></use>
-						}
-						</svg>
-					</div>
+					<TriggerTempButton
+						triggerTemp={this.triggerTemp}
+						onTempTrigger={this.state.onTempTrigger}
+					/>
 					
 					<svg className="u-icon__xl" aria-labelledby="title" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
 					<title>{weather.currently + " icon"}</title>
