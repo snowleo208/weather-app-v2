@@ -60,11 +60,12 @@
     "build-css": "node-sass-chokidar --include-path ./client/stylesheets --include-path ./node_modules client/ -o client/",
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./client/stylesheets --include-path ./node_modules client/ -o client/ --watch --recursive",
     "build": "npm-run-all build-css build-js",
-    "test": "mocha --require ignore-styles --reporter spec ./test/helpers.js ./test/\"*.spec.js\"",
+    "test": "mocha --require ignore-styles --reporter spec ./test/helpers.js ./test/\"*.spec.js\" --require babel-register",
     "tdd": "npm test -- --watch",
     "heroku-postbuild": "npm run build"
   },
   "devDependencies": {
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "chai": "^4.1.2",
     "cors": "^2.8.4",
     "dotenv": "^5.0.1",
