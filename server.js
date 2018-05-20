@@ -13,8 +13,6 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 
-const port = process.env.PORT || 3001;
-
 app.get('/api/weather', async function (req, res) {
 	let location;
 	location = await axios.get('https://ipinfo.io/?token=' + process.env.IPINFO_API_KEY)
@@ -36,7 +34,10 @@ app.get('/api/weather', async function (req, res) {
 	res.send(weather.data);
 });
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+var server = app.listen(process.env.PORT || 3001, function () {
+  var port = server.address().port;
+  console.log("Server is working on port " + port);
+});
 
 // Express only serves static assets in production
 if (process.env.NODE_ENV === 'production') {
