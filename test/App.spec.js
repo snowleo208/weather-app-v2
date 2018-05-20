@@ -6,7 +6,7 @@ import sinon from 'sinon'
 import App from '../client/components/App';
 import Weather from '../client/components/Weather';
 
-describe('<App/>', () => {
+describe('App Component', () => {
     const wrapper = mount(<App/>);
     
     it('renders correctly', () => {

@@ -81,7 +81,7 @@ class Weather extends Component {
 				<Loading onLoading={this.state.onLoading} />
 				
 				</div>
-				{!this.state.onLoading && weather.location? (
+				{!this.state.onLoading && weather.currently? (
 					<div className="c-weather--container u-fade">
 					<section className="c-weather--grid">
 					
