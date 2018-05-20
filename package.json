@@ -61,7 +61,7 @@
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./client/stylesheets --include-path ./node_modules client/ -o client/ --watch --recursive",
     "build": "npm-run-all build-css build-js",
     "test": "mocha --require ignore-styles --reporter spec ./test/helpers.js ./test/\"*.spec.js\" --require babel-register",
-    "tdd": "npm test -- --watch",
+    "tdd": "npm test --watch",
     "heroku-postbuild": "npm run build"
   },
   "devDependencies": {

@@ -9,6 +9,7 @@ import sample from './weather.json'
 import Weather from '../client/components/Weather';
 import ReloadButton from '../client/components/ReloadButton';
 import TriggerTempButton from '../client/components/TriggerTempButton';
+import Loading from '../client/components/Loading';
 
 describe('Weather Component', () => {
 	const weather = sinon.stub();

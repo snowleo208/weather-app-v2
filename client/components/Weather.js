@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import TriggerTempButton from './TriggerTempButton';
+import Loading from './Loading';
 import ReloadButton from './ReloadButton';
 require('babel-polyfill');
 
@@ -75,13 +76,10 @@ class Weather extends Component {
 			 />
 			</header>
 			<div className="c-container">
-			<div className={this.state.onLoading? "u-loading" : "u-none"}>
-			{this.state.onLoading?
-				<svg className="u-icon__md" aria-labelledby="title" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-				<title>Icon</title>
-				<use href="sprite.svg#spin1"></use>
-				</svg>
-				: ''}
+			<div>
+			
+				<Loading onLoading={this.state.onLoading} />
+				
 				</div>
 				{!this.state.onLoading && weather.location? (
 					<div className="c-weather--container u-fade">
