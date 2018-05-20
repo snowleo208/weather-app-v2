@@ -2,9 +2,8 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon'
-import axios from 'axios';
-import moxios from 'moxios'
 import sample from './weather.json'
+import location from './location.json'
 
 import Weather from '../client/components/Weather';
 import ReloadButton from '../client/components/ReloadButton';
@@ -49,42 +48,36 @@ describe('Weather Component', () => {
 
 })
 
+describe('Mocking API requests', function () {
+	it('specify response for a specific request', () => {
+		const wrapper = mount(<Weather />, { lifecycleExperimental: true });
+		wrapper.setState({ weather: sample, onLoading: false, location: location });
+		wrapper.update();
+		expect(wrapper.state('weather').currently).to.not.eql({})
+		wrapper.unmount();
+	})
 
-describe('mocking API requests', function () {
-	const wrapper = mount(<Weather />, { lifecycleExperimental: true });
+	it('weather summary appears after weather changes', () => {
+		const wrapper = mount(<Weather />, { lifecycleExperimental: true });
+		wrapper.setState({ weather: sample, onLoading: false, location: location });
+		wrapper.update();
+		expect(wrapper.find('.c-weather--summary').length).to.equal(1);
+		wrapper.unmount();
+	})
 
-	describe('using moxios to mock axios requests', function () {
+	it('TriggerTempButton disappears before getting data', () => {
+		const wrapper = mount(<Weather />, { lifecycleExperimental: true });
+		wrapper.setState({ onLoading: true });
+		wrapper.update();
+		expect(wrapper.find(TriggerTempButton).length).to.equal(0);
+		wrapper.unmount();
+	})
 
-		beforeEach(function () {
-			moxios.install()
-			moxios.stubRequest('/api/weather', {
-				status: 200,
-				responseText: [...sample]
-			})
-			const resolved = new Promise((r) => r({ sample }));
-			axios.get('/api/weather').then(resolved)
-			wrapper.setState({ weather: resolved._v.sample, onLoading: false });
-			wrapper.update();
-		})
-
-		afterEach(function () {
-			moxios.uninstall()
-		})
-
-		it('specify response for a specific request', () => {
-			const wrapper = mount(<Weather />, { lifecycleExperimental: true });
-			wrapper.update();
-			expect(wrapper.state('weather').currently).to.not.eql({})
-		})
-
-		// it('Weather summary appears after weather changes', () => {
-		// 	wrapper.update();
-		// 	expect(wrapper.find('.c-weather--grid').length).to.equal(1);
-		// })
-
-		// it('Weather summary appears after weather changes', () => {
-		// 	expect(wrapper.find(TriggerTempButton).length).to.equal(1);
-		// })
-
+	it('TriggerTempButton exists after got data', () => {
+		const wrapper = mount(<Weather />, { lifecycleExperimental: true });
+		wrapper.setState({ weather: sample, onLoading: false, location: location });
+		wrapper.update();
+		expect(wrapper.find(TriggerTempButton).length).to.equal(1);
+		wrapper.unmount();
 	})
 })
