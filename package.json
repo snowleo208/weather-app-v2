@@ -12,6 +12,7 @@
     "server": "nodemon server.js",
     "client": "cd client && npm run start-dev",
     "tdd": "npm test --watch",
+    "heroku-prebuild": "npm install --dev",
     "heroku-postbuild": "npm run build",
     "test": "mocha --require ignore-styles --reporter spec ./test/helpers.js ./test/\"*.spec.js\" --require babel-register"
   },
