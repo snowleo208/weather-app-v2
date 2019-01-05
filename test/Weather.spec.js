@@ -64,20 +64,4 @@ describe('Mocking API requests', function () {
 		expect(wrapper.find('.c-weather--summary').length).to.equal(1);
 		wrapper.unmount();
 	})
-
-	it('TriggerTempButton disappears before getting data', () => {
-		const wrapper = mount(<Weather />, { lifecycleExperimental: true });
-		wrapper.setState({ onLoading: true });
-		wrapper.update();
-		expect(wrapper.find(TriggerTempButton).length).to.equal(0);
-		wrapper.unmount();
-	})
-
-	it('TriggerTempButton exists after got data', () => {
-		const wrapper = mount(<Weather />, { lifecycleExperimental: true });
-		wrapper.setState({ weather: sample, onLoading: false, location: location });
-		wrapper.update();
-		expect(wrapper.find(TriggerTempButton).length).to.equal(1);
-		wrapper.unmount();
-	})
 })

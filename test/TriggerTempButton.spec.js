@@ -37,6 +37,8 @@ describe('Temperature Trigger Component', () => {
 		expect(wrapper.find(TriggerTempButton).length).to.equal(1);
 		wrapper.find(TriggerTempButton).simulate('click');
 		expect(wrapper.state('onTempTrigger')).to.equal(true);
+		
+		
 		wrapper.find(TriggerTempButton).simulate('click');
 		expect(wrapper.state('onTempTrigger')).to.equal(false);
 		wrapper.unmount();
