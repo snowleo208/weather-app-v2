@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import '../stylesheets/main.css';
+import '../stylesheets/main.sass';
 import Weather from './Weather';
-require("babel-core/register");
-require("babel-polyfill");
+import '@babel/register';
+import '@babel/polyfill';
 
 class App extends Component {
   render() {
-    return (
-      <Weather />
-    );
+    return <Weather />;
   }
 }
 
