@@ -12,7 +12,7 @@ class ReloadButton extends Component {
           preserveAspectRatio="xMidYMid meet"
         >
           <title>Reload</title>
-          <use href={'sprite.svg#spin'} />
+          <use href={'/public/sprite.svg#spin'} />
         </svg>
       </button>
     );

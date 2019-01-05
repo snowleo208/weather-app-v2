@@ -12,7 +12,7 @@ class Loading extends Component {
           preserveAspectRatio="xMidYMid meet"
         >
           <title>Icon</title>
-          <use href="./assets/sprite.svg#spin1" />
+          <use href="/public/sprite.svg#spin1" />
         </svg>
       </div>
     );

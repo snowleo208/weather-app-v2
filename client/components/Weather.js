@@ -51,13 +51,13 @@ class Weather extends Component {
       let hour = new Date().getHours();
       if (hour > 5 && hour < 12) {
         this.appRoot.current.style.backgroundImage =
-          'url("./assets/img/simon-matzinger-345390-unsplash.jpg")';
+          'url("/public/img/simon-matzinger-345390-unsplash.jpg")';
       } else if (hour > 18 && hour < 5) {
         this.appRoot.current.style.backgroundImage =
-          'url("./assets/img/michael-liao-388166-unsplash.jpg")';
+          'url("/public/img/michael-liao-388166-unsplash.jpg")';
       } else {
         this.appRoot.current.style.backgroundImage =
-          'url("./assets/img/ales-krivec-24158-unsplash.jpg")';
+          'url("/public/img/ales-krivec-24158-unsplash.jpg")';
       }
     }
   };
@@ -71,7 +71,7 @@ class Weather extends Component {
     return (
       <div id="app" ref={this.appRoot}>
         <header>
-          <img src="./assets/logo_xs.png" alt="hava" />
+          <img src="/public/logo_xs.png" alt="hava" />
 
           <ReloadButton
             reloadData={this.reloadData}
@@ -97,7 +97,7 @@ class Weather extends Component {
                   preserveAspectRatio="xMidYMid meet"
                 >
                   <title>{weather.currently + ' icon'}</title>
-                  <use href={'./assets/sprite.svg#' + weather.currently.icon} />
+                  <use href={'/public/sprite.svg#' + weather.currently.icon} />
                 </svg>
                 {this.state.onTempTrigger ? (
                   <h2 className="c-weather--temp u-text-center">
@@ -131,7 +131,7 @@ class Weather extends Component {
                       preserveAspectRatio="xMidYMid meet"
                     >
                       <title>Wind</title>
-                      <use href={'./assets/sprite.svg#strong-wind'} />
+                      <use href={'/public/sprite.svg#strong-wind'} />
                     </svg>
                     <p className="t-info--title u-m-0">Wind</p>
                   </div>
@@ -146,7 +146,7 @@ class Weather extends Component {
                       preserveAspectRatio="xMidYMid meet"
                     >
                       <title>Visibility</title>
-                      <use href={'./assets/sprite.svg#fog'} />
+                      <use href={'/public/sprite.svg#fog'} />
                     </svg>
                     <p className="t-info--title u-m-0">Visibility</p>
                   </div>
@@ -161,7 +161,7 @@ class Weather extends Component {
                       preserveAspectRatio="xMidYMid meet"
                     >
                       <title>Humidity</title>
-                      <use href={'./assets/sprite.svg#humidity'} />
+                      <use href={'/public/sprite.svg#humidity'} />
                     </svg>
                     <p className="t-info--title u-m-0">Humidity</p>
                   </div>
@@ -181,7 +181,7 @@ class Weather extends Component {
                           preserveAspectRatio="xMidYMid meet"
                         >
                           <title>{item.icon}</title>
-                          <use href={'./assets/sprite.svg#' + item.icon} />
+                          <use href={'/public/sprite.svg#' + item.icon} />
                         </svg>
                         <p className="c-forecast--time">
                           {new Date(item.time * 1000).getHours() + ':00'}
@@ -204,7 +204,7 @@ class Weather extends Component {
                         preserveAspectRatio="xMidYMid meet"
                       >
                         <title>{item.icon}</title>
-                        <use href={'./assets/sprite.svg#' + item.icon} />
+                        <use href={'/public/sprite.svg#' + item.icon} />
                       </svg>
                       <div className="c-daily--forecast">
                         <p className="c-daily--time">

@@ -3,6 +3,10 @@
   "version": "0.3.0",
   "description": "A weather app for user to view local weather",
   "main": "index.js",
+  "engines": {
+    "node": "11.6.0",
+    "npm": "6.5.0"
+  },
   "scripts": {
     "start": "node server.js",
     "dev": "npm-run-all -p server client",
@@ -18,11 +22,7 @@
   },
   "author": "snowleo208",
   "license": "ISC",
-  "proxy": {
-    "/api": {
-      "target": "http://localhost:3001"
-    }
-  },
+  "proxy": "http://localhost:3001",
   "devDependencies": {
     "@babel/core": "^7.0.1",
     "@babel/plugin-proposal-class-properties": "^7.2.3",
