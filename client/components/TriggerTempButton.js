@@ -13,9 +13,9 @@ class TriggerTempButton extends Component {
         >
           <title>Temperature</title>
           {this.props.onTempTrigger ? (
-            <use href="/public/sprite.svg#celsius" />
+            <use href="./assets/sprite.svg#celsius" />
           ) : (
-            <use href="/public/sprite.svg#fahrenheit" />
+            <use href="./assets/sprite.svg#fahrenheit" />
           )}
         </svg>
       </button>
